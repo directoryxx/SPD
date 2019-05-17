@@ -18,3 +18,33 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/opengate', 'OpenGateController@index')->name('opengate');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('index', function () {
+        return "hello,admin";
+    });
+});
+
+
+Route::prefix('manager')->group(function () {
+    Route::get('index', function () {
+        return "hello,manager";
+    });
+});
+
+
+Route::prefix('supervisor')->group(function () {
+    Route::get('index', function () {
+        return "hello,supervisor";
+    });
+});
+
+
+Route::prefix('karyawan')->group(function () {
+    Route::get('index', function () {
+        return "hello,karyawan";
+    });
+});
