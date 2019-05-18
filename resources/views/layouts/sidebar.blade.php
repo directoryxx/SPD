@@ -13,6 +13,12 @@
                         <i class="nav-icon icon-note"></i> Kategori
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('admin/users')}}">
+                        <i class="nav-icon icon-user"></i> Users
+                    </a>
+                </li>
                 
             @endif
 

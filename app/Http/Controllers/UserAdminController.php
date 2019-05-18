@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Kategori;
+use App\User;
 
-class KategoriAdminController extends Controller
+class UserAdminController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admincheck');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +14,8 @@ class KategoriAdminController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::all();
-        return view('admin.kategori')->with('kategori',$kategori);
+        $user = User::all();
+        return view('admin.user')->with('users',$user);
     }
 
     /**
@@ -43,11 +37,17 @@ class KategoriAdminController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-    		'namakategori' => 'required',
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'roles' => 'required'
     	]);
  
-        Kategori::create([
-    		'namakategori' => $request->namakategori,
+        User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'roles' => $request->roles
     	]);
  
     	return redirect()->back();
@@ -85,14 +85,18 @@ class KategoriAdminController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'namakategori' => 'required',
+            'nama' => 'required',
+            'email' => 'required',
+            'roles' => 'required',
             
          ]);
       
-         $kategori = Kategori::find($id);
-         $kategori->namakategori = $request->namakategori;
+         $user = User::find($id);
+         $user->name = $request->nama;
+         $user->email = $request->email;
+         $user->roles = $request->roles;
          //$pegawai->alamat = $request->alamat;
-         $kategori->save();
+         $user->save();
          return redirect()->back();
     }
 
@@ -104,9 +108,8 @@ class KategoriAdminController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->delete();
+        $user = User::find($id);
+        $user->delete();
         return redirect()->back();
-
     }
 }
