@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class KaryawanCheck
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/opengate');
+            if (Auth::user()->roles != 4){
+                return redirect('login');
+            }
+            //return redirect('/home');
         }
 
         return $next($request);

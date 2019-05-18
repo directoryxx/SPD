@@ -12,39 +12,31 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/opengate', 'OpenGateController@index')->name('opengate');
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('index', function () {
-        return "hello,admin";
-    });
+    Route::get('/index', 'HomeAdminController@index')->name('admin.index');
 });
 
 
 Route::prefix('manager')->group(function () {
-    Route::get('index', function () {
-        return "hello,manager";
-    });
+    Route::get('/index', 'HomeManagerController@index')->name('manager.index');
 });
 
 
 Route::prefix('supervisor')->group(function () {
-    Route::get('index', function () {
-        return "hello,supervisor";
-    });
+    Route::get('/index', 'HomeSupervisorController@index')->name('supervisor.index');
 });
 
 
 Route::prefix('karyawan')->group(function () {
-    Route::get('index', function () {
-        return "hello,karyawan";
-    });
+    Route::get('/index', 'HomeKaryawanController@index')->name('karyawan.index');
 });
