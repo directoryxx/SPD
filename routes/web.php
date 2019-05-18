@@ -24,6 +24,7 @@ Route::get('/opengate', 'OpenGateController@index')->name('opengate');
 
 Route::prefix('admin')->group(function () {
     Route::get('/index', 'HomeAdminController@index')->name('admin.index');
+    Route::resource('kategori', 'KategoriAdminController');
 });
 
 
