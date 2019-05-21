@@ -31,11 +31,15 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('manager')->group(function () {
     Route::get('/index', 'HomeManagerController@index')->name('manager.index');
+    Route::resource('createproject', 'CreateProjectController');
+
 });
 
 
 Route::prefix('supervisor')->group(function () {
     Route::get('/index', 'HomeSupervisorController@index')->name('supervisor.index');
+    Route::get('/detailproyek/{id}', 'HomeSupervisorController@proyekhandlespv')->name('supervisor.detailproyek');
+    Route::post('/detailproyek/{id}','HomeSupervisorController@insertkaryawan')->name('supervisor.pilihkaryawan');
 });
 
 

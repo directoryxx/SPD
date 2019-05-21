@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function terlibat($id)
+    {
+        return $this->hasMany(Proyekterlibat::class)->where('user_id', $id);
+    }
 }

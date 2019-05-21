@@ -29,6 +29,13 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => Str::random(10),
+            'email' => 'manager1@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 2
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
             'email' => 'supervisor@gmail.com',
             'password' => bcrypt('secret'),
             'roles' => 3
@@ -36,7 +43,42 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => Str::random(10),
+            'email' => 'supervisor1@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 3
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
             'email' => 'karyawan@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 4
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'karyawan1@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 4
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'karyawan2@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 4
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'karyawan3@gmail.com',
+            'password' => bcrypt('secret'),
+            'roles' => 4
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'karyawan4@gmail.com',
             'password' => bcrypt('secret'),
             'roles' => 4
         ]);
