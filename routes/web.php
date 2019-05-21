@@ -45,4 +45,5 @@ Route::prefix('supervisor')->group(function () {
 
 Route::prefix('karyawan')->group(function () {
     Route::get('/index', 'HomeKaryawanController@index')->name('karyawan.index');
+    Route::post('/uploaddokumen','HomeKaryawanController@fileUpload')->name('karyawan.fileupload');
 });

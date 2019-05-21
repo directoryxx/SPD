@@ -108,10 +108,8 @@
                                                         <p> Upload tidak tersedia, Silahkan tunjuk Karyawan</p>   
                                                     @elseif($count_kat == 0)
                                                         <p> Tidak ada kategori , Silahkan hubungi admin </p>
-
                                                     @else 
                                                         
-
                                                     @endif
                                                 </center>
 

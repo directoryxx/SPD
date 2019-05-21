@@ -19,4 +19,8 @@ class Proyek extends Model
     {
         return $this->belongsTo(Proyekterlibat::class);
     }
+
+    public function file(){
+        return $this->hasMany(Fileproyek::class);
+    }
 }
