@@ -10,6 +10,11 @@ use Auth;
 
 class CreateProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('managercheck');
+    }
     /**
      * Display a listing of the resource.
      *

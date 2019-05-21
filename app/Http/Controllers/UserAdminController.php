@@ -7,6 +7,11 @@ use App\User;
 
 class UserAdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admincheck');
+    }
     /**
      * Display a listing of the resource.
      *
