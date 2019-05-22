@@ -20,25 +20,30 @@ class HomeKaryawanController extends Controller
 
     public function index()
     {
-        $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
-        $id = $id->proyek_id;
-        //dd($id);
-        $proyek_by = Proyek::find($id)->createdby()->first();
-        $proyek = Proyek::find($id)->first();
-        $karyawan = User::where('roles',4)->get();
-        $count = Proyekterlibat::where('proyek_id',$id)->count();
-        $count_kat = Kategori::count();
-        $kategori_all = Kategori::all();
-        //$id_proyek = $id;
-        
-        return view('karyawan.projecthandle')
-                ->with('proyek',$proyek)
-                ->with('proyek_by',$proyek_by)
-                ->with('karyawans',$karyawan)
-                ->with('id',$id)
-                ->with('count',$count)
-                ->with('kategori_all',$kategori_all)
-                ->with('count_kat',$count_kat);
+        if(Proyekterlibat::where('user_id',Auth::user()->id)->count() > 0){
+            $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
+            $id = $id->proyek_id;
+            //dd($id);
+            $proyek_by = Proyek::find($id)->createdby()->first();
+            $proyek = Proyek::find($id)->first();
+            $karyawan = User::where('roles',4)->get();
+            $count = Proyekterlibat::where('proyek_id',$id)->count();
+            $count_kat = Kategori::count();
+            $kategori_all = Kategori::all();
+            //$id_proyek = $id;
+            
+            return view('karyawan.projecthandle')
+                    ->with('proyek',$proyek)
+                    ->with('proyek_by',$proyek_by)
+                    ->with('karyawans',$karyawan)
+                    ->with('id',$id)
+                    ->with('count',$count)
+                    ->with('kategori_all',$kategori_all)
+                    ->with('count_kat',$count_kat);
+        } else {
+            return view('karyawan.index');
+        }
+
                 
         //return view('karyawan.index');
     }
