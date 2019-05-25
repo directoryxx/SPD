@@ -10,5 +10,10 @@ class Kategori extends Model
         'namakategori',
     ];
 
+    public function fileProyek()
+    {
+        return $this->hasMany(Fileproyek::class);
+    }
+
     
 }

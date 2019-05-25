@@ -19,7 +19,7 @@ class HomeKaryawanController extends Controller
     }
 
     public function index()
-    {
+    { 
         if(Proyekterlibat::where('user_id',Auth::user()->id)->count() > 0){
             $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
             $id = $id->proyek_id;
@@ -30,7 +30,22 @@ class HomeKaryawanController extends Controller
             $count = Proyekterlibat::where('proyek_id',$id)->count();
             $count_kat = Kategori::count();
             $kategori_all = Kategori::all();
+
+            $kategori_file = Kategori::with(['fileproyek'],function($join){
+                $join->where('fileproyeks.proyekid',$id);
+            })
+                    //->whereDoesntHave('kategori')
+                    //->where('fileproyeks.lokasifile')
+                    //->where('fileproyek.proyek_id',$id)
+                    ->get();
             //$id_proyek = $id;
+            $kat_file = Fileproyek::with(['kategori','proyek'])
+                //->whereDoesntHave('kategori')
+                //->where('fileproyeks.lokasifile')
+                ->where('proyek_id',$id);
+                //->get();
+
+            //dd($kategori_file[0]->fileproyek[0]->lokasifile);
             
             return view('karyawan.projecthandle')
                     ->with('proyek',$proyek)
@@ -38,7 +53,7 @@ class HomeKaryawanController extends Controller
                     ->with('karyawans',$karyawan)
                     ->with('id',$id)
                     ->with('count',$count)
-                    ->with('kategori_all',$kategori_all)
+                    ->with('kategori_all',$kategori_file)
                     ->with('count_kat',$count_kat);
         } else {
             return view('karyawan.index');

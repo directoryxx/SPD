@@ -96,27 +96,45 @@
                                     <p> Tidak ada kategori , Silahkan hubungi admin </p>
 
                                 @else 
-                                    @foreach ($kategori_all as $kategori)
-                                    <div class="col-lg-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                            <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
-                                            <div class="card-body">
-                                                <center>
-                                                    @if ($count < 5)
-
-                                                        <p> Upload tidak tersedia, Silahkan tunjuk Karyawan</p>   
-                                                    @elseif($count_kat == 0)
-                                                        <p> Tidak ada kategori , Silahkan hubungi admin </p>
-                                                    @else 
+                                        @foreach ($kategori_all as $kategori)
+                                            <div class="col-lg-12 text-center">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                    <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
+                                                    <div class="card-body">
                                                         
-                                                    @endif
-                                                </center>
+                                                            
+                                                                @if(count($kategori->fileproyek) > 0)
+                                                                        @foreach ($kategori->fileproyek as $file) 
+                                                                            @if ($file->lokasifile != null)                                                                   
+                                                                                <a target="_blank" href="{{$file->lokasifile}}">Link Dokumen</a>
+                                                                                <br/>
+                                                                                <br/>
+                                                                                <div class="float-sm-left">
+                                                                                    <button type="button" class="btn btn-success">Approve</button>
+                                                                                
+                                                                                </div><br>
+                                                                                <div class="float-sm-right">
+                                                                                    <button type="button" class="btn btn-danger">Reject</button>
+                                                                                
+                                                                                </div><br>
 
+                                                                            @endif
+                                                                        @endforeach
+                                                                
+                                                                @else
+                                                                    <p>Karyawan Belum Upload File</p>
+                                                                @endif
+                                                                <br/>
+
+                                                                
+                                                                
+                                                            
+                                                            <br/>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                            @endforeach
 
 
                                 @endif

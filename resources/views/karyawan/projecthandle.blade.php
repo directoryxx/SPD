@@ -40,26 +40,44 @@
                                             <div class="card-header">
                                             <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
                                             <div class="card-body">
-                                                <form action="{{url('karyawan/uploaddokumen')}}" method="post" enctype="multipart/form-data">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                                                        </div>
-                                                        <div class="custom-file">
-                                                            {{csrf_field()}}
-                                                            <input type="hidden" name="kategoriid" value="{{$kategori->id}}">
-                                                            <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
-                                                            aria-describedby="inputGroupFileAddon01">
-                                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                        </div>
-                                                    </div>
+                                                
+                                                    
+                                                        @if(count($kategori->fileproyek) > 0)
+                                                                @foreach ($kategori->fileproyek as $file) 
+                                                                    @if ($file->lokasifile != null)                                                                   
+                                                                        <a href="{{$file->lokasifile}}">Link Dokumen</a>
+                                                                        <br/>
+                                                                        <br/>
+                                                                        <div class="alert alert-warning">
+                                                                            <strong>Status:</strong> Masih Menunggu Persetujuan
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                        
+                                                        @else
+                                                            <form action="{{url('karyawan/uploaddokumen')}}" method="post" enctype="multipart/form-data">
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                                                            </div>
+                                                                                {{csrf_field()}}
+                                                                                <input type="hidden" name="kategoriid" value="{{$kategori->id}}">
+                                                                                <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
+                                                                                aria-describedby="inputGroupFileAddon01">
+                                                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                            </div>
+                                                                    <div class="input-group text-center">
+                                                                            <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        @endif
+
+                                                        
+                                                        
+                                                    
                                                     <br/>
-                                                    <center>
-                                                    <div class="input-group text-center">
-                                                        <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
-                                                    </div>
-                                                    </center>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
