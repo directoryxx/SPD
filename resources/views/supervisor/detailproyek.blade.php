@@ -23,6 +23,7 @@
                                 <p> Lokasi Proyek : {{$proyek->lokasiproyek}}</p>
                                 <p> PT Pengaju : {{$proyek->ptpengaju}}</p>
                                 <p> Ditunjuk Oleh : {{$proyek_by->name}}</p>
+                                <p> Proyek Masuk : <a href="/{{$proyek->lokasifileproyekmasuk}}">Link Dokumen</a></p>
                             </center>
 
                         </div>

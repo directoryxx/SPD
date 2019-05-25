@@ -66,7 +66,7 @@
                                                                                 <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
                                                                                 aria-describedby="inputGroupFileAddon01">
                                                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                                            </div>
+                                                                    </div>
                                                                     <div class="input-group text-center">
                                                                             <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
                                                                     </div>

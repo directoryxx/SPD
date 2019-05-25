@@ -19,7 +19,7 @@
                             <strong>Tambah</strong> Proyek 
                         </div>
 
-                        <form class="form-horizontal" action="{{url('manager/createproject')}}" method="post">
+                        <form class="form-horizontal" action="{{url('manager/createproject')}}" method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="hf-email">Nama Proyek</label>
@@ -49,6 +49,22 @@
                                             <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="hf-email">Upload Proyek Masuk</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                            </div>
+                                            {{csrf_field()}}
+                                            <input name="file" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             

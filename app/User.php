@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function terlibat($id)
+    public function terlibat()
     {
-        return $this->hasMany(Proyekterlibat::class)->where('user_id', $id);
+        return $this->hasMany(Proyekterlibat::class);
     }
 }

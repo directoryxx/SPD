@@ -18,6 +18,7 @@ class CreateProyeksTable extends Migration
             $table->string('namaproyek');
             $table->string('lokasiproyek');
             $table->string('ptpengaju');
+            $table->string('lokasifileproyekmasuk');
             $table->unsignedBigInteger('createdby');
             $table->integer('active')->default(1);
             $table->foreign('createdby')->references('id')->on('users');

@@ -20,6 +20,7 @@ class HomeKaryawanController extends Controller
 
     public function index()
     { 
+        
         if(Proyekterlibat::where('user_id',Auth::user()->id)->count() > 0){
             $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
             $id = $id->proyek_id;

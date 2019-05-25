@@ -51,12 +51,17 @@ class CreateProjectController extends Controller
             'lokasiproyek' => 'required',
             'ptpengaju' => 'required',
             'spvid' => 'required',
+            'file' => 'required'
         ]);
+        $uploadedFile = $request->file('file');        
+        $path = $uploadedFile->store('public/files');
+        $lokasi = "files/".$request->file('file')->hashName(); 
         $proyek = new Proyek();
         $proyek->namaproyek = $request->namaproyek;
         $proyek->lokasiproyek = $request->lokasiproyek;
         $proyek->ptpengaju = $request->ptpengaju;
         $proyek->createdby = Auth::user()->id;
+        $proyek->lokasifileproyekmasuk = $lokasi;
         $proyek->save();
 
         $lastid = $proyek->id;
