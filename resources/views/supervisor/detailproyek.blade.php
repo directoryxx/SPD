@@ -107,7 +107,7 @@
                                                                 @if(count($kategori->fileproyek) > 0)
                                                                         @foreach ($kategori->fileproyek as $file) 
                                                                             @if ($file->lokasifile != null)                                                                   
-                                                                                <a target="_blank" href="{{$file->lokasifile}}">Link Dokumen</a>
+                                                                                <a target="_blank" href="/{{$file->lokasifile}}">Link Dokumen</a>
                                                                                 <br/>
                                                                                 <br/>
                                                                                 <div class="float-sm-left">

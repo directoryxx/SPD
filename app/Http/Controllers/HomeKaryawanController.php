@@ -71,9 +71,11 @@ class HomeKaryawanController extends Controller
         ]);
         $uploadedFile = $request->file('file');        
         $path = $uploadedFile->store('public/files');
+        $lokasi = "files/".$request->file('file')->hashName(); 
+        //dd();
         $file = new Fileproyek();
         $file->namafile = $request->file->getClientOriginalName();
-        $file->lokasifile = $path;
+        $file->lokasifile = $lokasi;
         $file->user_id = Auth::user()->id;
         $file->kategori_id = $request->kategoriid;
         $file->status = 0;
