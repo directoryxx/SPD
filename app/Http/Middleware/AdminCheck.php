@@ -3,10 +3,14 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
 
-class AdminCheck
+
+class AdminCheck extends Middleware
 {
+    protected $guards = [];
+    
     /**
      * Handle an incoming request.
      *
@@ -15,9 +19,9 @@ class AdminCheck
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next, ...$guards)
     {
-        if (Auth::guard($guard)->check()) {
+        if (Auth::check()) {
             if (Auth::user()->id == null){
                 return redirect('login');
             } else {
@@ -26,6 +30,8 @@ class AdminCheck
                 }
             }
             //return redirect('/home');
+        } else {
+            return redirect('login');
         }
 
         return $next($request);

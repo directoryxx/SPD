@@ -26,6 +26,8 @@ class SupervisorCheck
                 }
             }
             //return redirect('/home');
+        } else {
+            return redirect('login');
         }
 
         return $next($request);

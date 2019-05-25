@@ -10,6 +10,7 @@ class HomeAdminController extends Controller
     public function __construct()
     {
         $this->middleware('admincheck');
+        //dd('helo');
     }
 
 

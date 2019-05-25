@@ -26,6 +26,8 @@ class ManagerCheck
                 }
             }
             //return redirect('/home');
+        } else {
+            return redirect('login');
         }
 
         return $next($request);
