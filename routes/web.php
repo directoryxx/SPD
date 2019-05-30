@@ -40,6 +40,8 @@ Route::prefix('supervisor')->group(function () {
     Route::get('/index', 'HomeSupervisorController@index')->name('supervisor.index');
     Route::get('/detailproyek/{id}', 'HomeSupervisorController@proyekhandlespv')->name('supervisor.detailproyek');
     Route::post('/detailproyek/{id}','HomeSupervisorController@insertkaryawan')->name('supervisor.pilihkaryawan');
+    Route::post('/fileproyek/accept/','HomeSupervisorController@acceptdokumen')->name('supervisor.acceptfile');
+    Route::post('/fileproyek/reject/','HomeSupervisorController@rejectdokumen')->name('supervisor.rejectfile');
 });
 
 

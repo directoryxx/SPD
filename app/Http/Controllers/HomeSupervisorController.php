@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Proyek; 
 use App\Proyekterlibat;
+use App\Fileproyek;
 use App\User;
 use App\Kategori;
 use Auth;
@@ -72,5 +73,28 @@ class HomeSupervisorController extends Controller
 
     function array_has_dupes($array) {
         return count($array) !== count(array_unique($array));
+    }
+
+    public function acceptdokumen(Request $request){
+        $this->validate($request,[
+    		'idfile' => 'required',
+        ]);
+        $fileproyek = Fileproyek::find($request->idfile);
+        $fileproyek->status = 1;
+        //$pegawai->alamat = $request->alamat;
+        $fileproyek->save();
+        return redirect()->back();
+    }
+
+    public function rejectdokumen(Request $request){
+        $this->validate($request,[
+    		'idfile' => 'required',
+        ]);
+        $fileproyek = Fileproyek::find($request->idfile);
+        $fileproyek->status = 2;
+        $fileproyek->komentar = $request->komentar;
+        //$pegawai->alamat = $request->alamat;
+        $fileproyek->save();
+        return redirect()->back();
     }
 }

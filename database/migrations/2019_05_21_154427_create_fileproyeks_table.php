@@ -21,6 +21,7 @@ class CreateFileproyeksTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kategori_id');
             $table->unsignedBigInteger('proyek_id');
+            $table->string('komentar')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('kategori_id')->references('id')->on('kategoris');
             $table->foreign('proyek_id')->references('id')->on('proyeks');
