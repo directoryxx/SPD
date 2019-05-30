@@ -57,6 +57,7 @@
                                                                             <br/>
                                                                             <div class="alert alert-danger">
                                                                                 <strong>Status:</strong> Dokumen Sudah anda tolak
+                                                                                <p>Alasan : {{$file->komentar}}.</p>
                                                                             </div>
                                                                             @if($countfilewaiting == 0)
                                                                             <form action="{{url('karyawan/uploaddokumen')}}" method="post" enctype="multipart/form-data">
