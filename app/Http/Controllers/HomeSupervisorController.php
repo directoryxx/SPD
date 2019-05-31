@@ -38,10 +38,12 @@ class HomeSupervisorController extends Controller
             
         ]);
         $count = Proyekterlibat::where('proyek_id',$id)->count();
-        $count_kat = Kategori::count();
+        $count_kat = Kategori::where('id','<',100)->count();
+        $proyek_approve = Fileproyek::where('proyek_id',$id)->where('status',1)->count();
         $kategori_all = Kategori::all();
         $id_proyek = $id;
-        //dd($karyawan);
+        $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();
+        //dd($dokumenrekap);
         return view('supervisor.detailproyek')
                 ->with('proyek',$proyek)
                 ->with('proyek_by',$proyek_by)
@@ -49,7 +51,9 @@ class HomeSupervisorController extends Controller
                 ->with('id',$id_proyek)
                 ->with('count',$count)
                 ->with('kategori_all',$kategori_all)
-                ->with('count_kat',$count_kat);
+                ->with('count_kat',$count_kat)
+                ->with('dokumenrekap',$dokumenrekap)
+                ->with('proyek_approve',$proyek_approve);
     }
 
     public function insertkaryawan(Request $request,$id){
@@ -95,6 +99,28 @@ class HomeSupervisorController extends Controller
         $fileproyek->komentar = $request->komentar;
         //$pegawai->alamat = $request->alamat;
         $fileproyek->save();
+        return redirect()->back();
+    }
+
+    public function fileUpload(Request $request){
+        $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
+        $id = $id->proyek_id;
+        $this->validate($request, [
+            'file' => 'required|file|max:2000'
+        ]);
+        $uploadedFile = $request->file('file');        
+        $path = $uploadedFile->store('public/files');
+        $lokasi = "files/".$request->file('file')->hashName(); 
+        //dd();
+        $file = new Fileproyek();
+        $file->namafile = $request->file->getClientOriginalName();
+        $file->lokasifile = $lokasi;
+        $file->user_id = Auth::user()->id;
+        $file->kategori_id = $request->kategoriid;
+        $file->status = 0;
+        $file->proyek_id = $id;
+        $file->save();
+
         return redirect()->back();
     }
 }

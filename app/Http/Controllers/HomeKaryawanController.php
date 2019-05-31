@@ -29,12 +29,13 @@ class HomeKaryawanController extends Controller
             $karyawan = User::where('roles',4)->get();
             $count = Proyekterlibat::where('proyek_id',$id)->count();
             $count_kat = Kategori::count();
-            $file_waiting = Fileproyek::where('proyek_id',$id)->where('status',0)->count();
+            $file_waiting = Fileproyek::where('proyek_id',$id)->where('kategori_id','<',100)->where('status',0)->count();
             $kategori_all = Kategori::all();
 
             $kategori_file = Kategori::with(['fileproyek'],function($join){
                 $join->where('fileproyeks.proyekid',$id);
             })->get();
+
 
             $kat_file = Fileproyek::with(['kategori','proyek'])
                 ->where('proyek_id',$id);

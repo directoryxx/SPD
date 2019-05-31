@@ -35,7 +35,10 @@
                         <div class="card-body">
                             <center>
                                     @foreach ($kategori_all as $kategori)
-                                    <div class="col-lg-12 text-center">
+                                        @if($kategori->id > 100)
+
+                                        @else 
+                                        <div class="col-lg-12 text-center">
                                         <div class="card">
                                             <div class="card-header">
                                             <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
@@ -43,48 +46,57 @@
                                                 
                                                     
                                                         @if(count($kategori->fileproyek) > 0)
+                                                                
                                                                 @foreach ($kategori->fileproyek as $file) 
-                                                                    @if ($file->lokasifile != null)                                                                   
-                                                                        <a href="/{{$file->lokasifile}}">Link Dokumen</a>
-                                                                        <br/>
-                                                                        <br/>
-                                                                        @if ($file->status == 1)
+                                                                    
+                                                                    @if($file->kategori_id > 100)
+                                                                        <p>skip</p>
+                                                                    @else 
+                                                                        @if ($file->lokasifile != null)                                                                   
+                                                                            <a href="/{{$file->lokasifile}}">Link Dokumen</a>
                                                                             <br/>
-                                                                            <div class="alert alert-success">
-                                                                                <strong>Status:</strong> Dokumen sudah diterima
-                                                                            </div>
-                                                                        @elseif ($file->status == 2)
                                                                             <br/>
-                                                                            <div class="alert alert-danger">
-                                                                                <strong>Status:</strong> Dokumen Sudah anda tolak
-                                                                                <p>Alasan : {{$file->komentar}}.</p>
-                                                                            </div>
-                                                                            @if($countfilewaiting == 0)
-                                                                            <form action="{{url('karyawan/uploaddokumen')}}" method="post" enctype="multipart/form-data">
-                                                                                <div class="input-group">
-                                                                                    <div class="custom-file">
-                                                                                            <div class="input-group-prepend">
-                                                                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                                                                                            </div>
-                                                                                                {{csrf_field()}}
-                                                                                                <input type="hidden" name="kategoriid" value="{{$kategori->id}}">
-                                                                                                <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
-                                                                                                aria-describedby="inputGroupFileAddon01">
-                                                                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                                                    </div>
-                                                                                    <div class="input-group text-center">
-                                                                                            <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
-                                                                                    </div>
+                                                                            @if ($file->status == 1)
+                                                                                <br/>
+                                                                                <div class="alert alert-success">
+                                                                                    <strong>Status:</strong> Dokumen sudah diterima
                                                                                 </div>
-                                                                            </form>
-                                                                            @endif
-                                                                        @else
-                                                                            <div class="alert alert-warning">
-                                                                                <strong>Status:</strong> Masih Menunggu Persetujuan
-                                                                            </div>
-                                                                        @endif 
-                                                                        
+                                                                            @elseif ($file->status == 2)
+                                                                                <br/>
+                                                                                <div class="alert alert-danger">
+                                                                                    <strong>Status:</strong> Dokumen anda di tolak
+                                                                                    <p>Alasan : {{$file->komentar}}.</p>
+                                                                                </div>
+                                                                                @if($countfilewaiting > 0)
+                                                                                <form action="{{url('karyawan/uploaddokumen')}}" method="post" enctype="multipart/form-data">
+                                                                                    <div class="input-group">
+                                                                                        <div class="custom-file">
+                                                                                                <div class="input-group-prepend">
+                                                                                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                                                                                </div>
+                                                                                                    {{csrf_field()}}
+                                                                                                    <input type="hidden" name="kategoriid" value="{{$kategori->id}}">
+                                                                                                    <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
+                                                                                                    aria-describedby="inputGroupFileAddon01">
+                                                                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                                        </div>
+                                                                                        <div class="input-group text-center">
+                                                                                                <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                                @endif
+                                                                            @else
+                                                                                <div class="alert alert-warning">
+                                                                                    <strong>Status:</strong> Masih menunggu persetujuan
+                                                                                </div>
+                                                                            @endif 
+                                                                            
+                                                                        @endif
+
+
                                                                     @endif
+                                                                    
                                                                 @endforeach
                                                         
                                                         @else
@@ -114,6 +126,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                        @endif
+                                    
                                     @endforeach
                             </center>
 

@@ -32,6 +32,8 @@ Route::prefix('admin')->group(function () {
 Route::prefix('manager')->group(function () {
     Route::get('/index', 'HomeManagerController@index')->name('manager.index');
     Route::resource('createproject', 'CreateProjectController');
+    Route::get('/proyek/{id}', 'ProjectManagerController@index')->name('manager.detailproyek');
+    Route::post('/proyek/{id}','ProjectManagerController@accept')->name('manager.accept');
 
 });
 
@@ -42,6 +44,7 @@ Route::prefix('supervisor')->group(function () {
     Route::post('/detailproyek/{id}','HomeSupervisorController@insertkaryawan')->name('supervisor.pilihkaryawan');
     Route::post('/fileproyek/accept/','HomeSupervisorController@acceptdokumen')->name('supervisor.acceptfile');
     Route::post('/fileproyek/reject/','HomeSupervisorController@rejectdokumen')->name('supervisor.rejectfile');
+    Route::post('/uploaddokumen','HomeSupervisorController@fileUpload')->name('supervisor.fileupload');
 });
 
 
