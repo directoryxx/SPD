@@ -93,7 +93,7 @@
                                 <tbody>
                                     @foreach ($proyeks as $proyek)
                                     <tr>
-                                        <td>{{$proyek->namaproyek}}</td>
+                                        <td><a href="/manager/proyek/{{$proyek->id}}">{{$proyek->namaproyek}}</a></td>
                                         <td>{{$proyek->lokasiproyek}}</td>
                                         <td>{{$proyek->ptpengaju}}</td>    
                                         <td>{{$proyek->created_at}}</td>
