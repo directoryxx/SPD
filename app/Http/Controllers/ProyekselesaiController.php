@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 class ProyekselesaiController extends Controller
 {
     public function __construct(){
-        $this->middleware('supervisorcheck');
-        $this->middleware('managercheck');
-        $this->middleware('karyawancheck');
+        $this->middleware('auth');
     }
 
     public function index (){
