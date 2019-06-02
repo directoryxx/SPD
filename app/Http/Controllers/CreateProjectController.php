@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Proyek;
 use App\User;
 use App\Proyekterlibat;
+use App\Kategori;
 use Auth;
 
 class CreateProjectController extends Controller
@@ -25,6 +26,7 @@ class CreateProjectController extends Controller
         $proyek = Proyek::all();
         $users = User::where('roles', 3)
                     ->get();
+        $count_kat = Kategori::whereNotNull('created_at')->count();
         return view('manager.createproject')->with('proyeks',$proyek)->with('users',$users);
     }
 

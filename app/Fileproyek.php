@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Fileproyek extends Model
 {
@@ -15,5 +16,13 @@ class Fileproyek extends Model
     public function proyek()
     {
         return $this->belongsTo(Proyek::class);
+    }
+
+    public static function countfile($kat_id,$proyek_id){
+        $count_file = DB::table('fileproyeks')
+            ->where('kategori_id',$kat_id)
+            ->where('proyek_id',$proyek_id)
+            ->count();
+        return $count_file;
     }
 }

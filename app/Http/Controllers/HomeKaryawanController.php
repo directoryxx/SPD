@@ -29,7 +29,9 @@ class HomeKaryawanController extends Controller
             $karyawan = User::where('roles',4)->get();
             $count = Proyekterlibat::where('proyek_id',$id)->count();
             $count_kat = Kategori::count();
-            $file_waiting = Fileproyek::where('proyek_id',$id)->where('kategori_id','<',100)->where('status',0)->count();
+            $file_reject = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',2)->count();
+            $file_accept = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
+            $file_waiting = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',0)->count();
             $kategori_all = Kategori::all();
 
             $kategori_file = Kategori::with(['fileproyek'],function($join){
@@ -40,7 +42,9 @@ class HomeKaryawanController extends Controller
             $kat_file = Fileproyek::with(['kategori','proyek'])
                 ->where('proyek_id',$id);
             return view('karyawan.projecthandle')
-                    ->with('countfilewaiting',$file_waiting)
+                    ->with('fileaccept',$file_accept)
+                    ->with('filereject',$file_reject)
+                    ->with('filewaiting',$file_waiting)
                     ->with('proyek',$proyek)
                     ->with('proyek_by',$proyek_by)
                     ->with('karyawans',$karyawan)

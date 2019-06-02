@@ -34,7 +34,8 @@ Route::prefix('manager')->group(function () {
     Route::resource('createproject', 'CreateProjectController');
     Route::get('/proyek/{id}', 'ProjectManagerController@index')->name('manager.detailproyek');
     Route::post('/proyek/{id}','ProjectManagerController@accept')->name('manager.accept');
-
+    Route::post('/fileproyek/accept/','HomeManagerController@acceptdokumen')->name('manager.acceptfile');
+    Route::post('/fileproyek/reject/','HomeManagerController@rejectdokumen')->name('manager.rejectfile');
 });
 
 

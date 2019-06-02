@@ -89,47 +89,48 @@
                         <i class="fa fa-user"></i> Rekap dokumen manajer </div>
                         <div class="card-body">
                             @if($count_kat == $proyek_approve)
-                                @if($dokumenrekap->id == null)
-                                <form action="{{url('supervisor/uploaddokumen')}}" method="post" enctype="multipart/form-data">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                    @if($dokumenrekap == null)
+                                    <form action="{{url('supervisor/uploaddokumen')}}" method="post" enctype="multipart/form-data">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                                </div>
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="kategoriid" value="101">
+                                                <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
+                                                aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                             </div>
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="kategoriid" value="101">
-                                            <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
-                                            aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            <div class="input-group text-center">
+                                                <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
+                                            </div>
                                         </div>
-                                        <div class="input-group text-center">
-                                            <button type="submit" class="btn btn-success  mx-auto d-block">Upload</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                @else
-                                    <center>
-                                    <a target="_blank" href="/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
-                                    <br/>
-                                    @if ($dokumenrekap->status == 1)
+                                    </form>
+                                    @else
+                                        <center>
+                                        <a target="_blank" href="/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
                                         <br/>
-                                        <div class="alert alert-success">
-                                            Dokumen Sudah anda terima
-                                        </div>
-                                    @elseif ($dokumenrekap->status == 2)
-                                        <br/>
-                                        <div class="alert alert-warning">
-                                            Dokumen Sudah anda tolak
-                                        </div>
-                                    @else 
-                                        <br/>
-                                        <div class="alert alert-warning">
-                                            Masih Menunggu persetujuan
-                                        </div>
-                                        
+                                        @if ($dokumenrekap->status == 1)
+                                            <br/>
+                                            <div class="alert alert-success">
+                                                Dokumen Sudah anda terima
+                                            </div>
+                                        @elseif ($dokumenrekap->status == 2)
+                                            <br/>
+                                            <div class="alert alert-warning">
+                                                Dokumen Sudah anda tolak
+                                            </div>
+                                        @else 
+                                            <br/>
+                                            <div class="alert alert-warning">
+                                                Masih Menunggu persetujuan
+                                            </div>
+                                            
+                                        @endif
+                                        </center>
                                     @endif
-                                    </center>
-                                @endif
+                                
                             @else
                                 <p>Dokumen belum disetujui semua</p>
                             @endif
@@ -151,7 +152,7 @@
 
                                 @else 
                                         @foreach ($kategori_all as $kategori)
-                                        @if($kategori->id > 100)
+                                        @if($kategori->id == 101)
 
                                         @else 
                                             <div class="col-lg-12 text-center">
