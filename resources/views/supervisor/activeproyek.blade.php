@@ -30,9 +30,9 @@
                                 <tbody>
                                     @foreach ($proyeks as $proyek)
                                     <tr>
-                                        <td><a href="{{url('supervisor/detailproyek')}}/{{$proyek->proyek->id}}">{{$proyek->proyek->namaproyek}}</td>
-                                        <td>{{$proyek->proyek->lokasiproyek}}</td>
-                                        <td>{{$proyek->proyek->ptpengaju}}</td>    
+                                        <td><a href="{{url('supervisor/detailproyek')}}/{{$proyek->id}}">{{$proyek->namaproyek}}</td>
+                                        <td>{{$proyek->lokasiproyek}}</td>
+                                        <td>{{$proyek->ptpengaju}}</td>    
                                         <td>{{$proyek->created_at}}</td>
                                     </tr>
                                     @endforeach
