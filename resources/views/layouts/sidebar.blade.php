@@ -21,7 +21,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('admin/proyekselesai')}}">
+                    <a class="nav-link" href="{{url('proyekselesai')}}">
                         <i class="nav-icon icon-list"></i> Proyek Selesai
                     </a>
                 </li>
@@ -41,7 +41,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('manager/proyekselesai')}}">
+                    <a class="nav-link" href="{{url('proyekselesai')}}">
                         <i class="nav-icon icon-list"></i> Proyek Selesai
                     </a>
                 </li>
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('supervisor/proyekselesai')}}">
+                    <a class="nav-link" href="{{url('proyekselesai')}}">
                         <i class="nav-icon icon-list"></i> Proyek Selesai
                     </a>
                 </li>
@@ -68,7 +68,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('karyawan/proyekselesai')}}">
+                    <a class="nav-link" href="{{url('proyekselesai')}}">
                         <i class="nav-icon icon-list"></i> Proyek Selesai
                     </a>
                 </li>

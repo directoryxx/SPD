@@ -26,7 +26,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/index', 'HomeAdminController@index')->name('admin.index');
     Route::resource('kategori', 'KategoriAdminController');
     Route::resource('users', 'UserAdminController');
-    Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('admin.proyekselesai');
 });
 
 
@@ -37,7 +36,6 @@ Route::prefix('manager')->group(function () {
     Route::post('/proyek/{id}','ProjectManagerController@accept')->name('manager.accept');
     Route::post('/fileproyek/accept/','HomeManagerController@acceptdokumen')->name('manager.acceptfile');
     Route::post('/fileproyek/reject/','HomeManagerController@rejectdokumen')->name('manager.rejectfile');
-    Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('manager.proyekselesai');
 });
 
 
@@ -48,12 +46,12 @@ Route::prefix('supervisor')->group(function () {
     Route::post('/fileproyek/accept/','HomeSupervisorController@acceptdokumen')->name('supervisor.acceptfile');
     Route::post('/fileproyek/reject/','HomeSupervisorController@rejectdokumen')->name('supervisor.rejectfile');
     Route::post('/uploaddokumen','HomeSupervisorController@fileUpload')->name('supervisor.fileupload');
-    Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('supervisor.proyekselesai');
 });
 
 
 Route::prefix('karyawan')->group(function () {
     Route::get('/index', 'HomeKaryawanController@index')->name('karyawan.index');
     Route::post('/uploaddokumen','HomeKaryawanController@fileUpload')->name('karyawan.fileupload');
-    Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('karyawan.proyekselesai');
 });
+
+Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('proyekselesai.index');
