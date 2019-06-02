@@ -20,7 +20,11 @@ class HomeSupervisorController extends Controller
 
     public function index()
     {
-        $proyek = Proyekterlibat::with(['user','proyek'])->where('user_id',Auth::user()->id)->get();
+        $proyek = Proyek::with(['terlibat' => function ($query) {
+            $query->where('proyekterlibats.user_id', '=', Auth::user()->id);
+        }])->where('active',1)->get();
+        //dd($proyek);
+        
         return view('supervisor.activeproyek')->with('proyeks',$proyek);
     }
 

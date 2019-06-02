@@ -87,6 +87,7 @@
                                         <th>Nama Proyek</th>
                                         <th>Lokasi Proyek</th>
                                         <th>PT Pengaju</th>
+                                        <th>Status</th>
                                         <th>Created At</th>                                        
                                     </tr>
                                 </thead>
@@ -95,7 +96,14 @@
                                     <tr>
                                         <td><a href="/manager/proyek/{{$proyek->id}}">{{$proyek->namaproyek}}</a></td>
                                         <td>{{$proyek->lokasiproyek}}</td>
-                                        <td>{{$proyek->ptpengaju}}</td>    
+                                        <td>{{$proyek->ptpengaju}}</td> 
+                                        <td>
+                                            @if($proyek->active == 1)
+                                                Aktif
+                                            @else
+                                                Tidak Aktif/Selesai
+                                            @endif
+                                        </td>    
                                         <td>{{$proyek->created_at}}</td>
                                     </tr>
                                     @endforeach
