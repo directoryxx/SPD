@@ -24,8 +24,7 @@ class CreateProjectController extends Controller
     public function index()
     {
         $proyek = Proyek::all();
-        $users = User::where('roles', 3)
-                    ->get();
+        $users = User::where('roles', 3)->get();
         $count_kat = Kategori::whereNotNull('created_at')->count();
         return view('manager.createproject')->with('proyeks',$proyek)->with('users',$users);
     }

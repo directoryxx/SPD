@@ -26,7 +26,7 @@ class ProjectManagerController extends Controller
         ]);
         $count = Proyekterlibat::where('proyek_id',$id)->count();
         $count_kat = Kategori::whereNotNull('created_at')->count();
-        $proyek_approve = Fileproyek::where('proyek_id',$id)->where('status',1)->count();
+        $proyek_approve = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
         $kategori_all = Kategori::whereNotNull('created_at')->get();
         $id_proyek = $id;
         $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();

@@ -20,6 +20,8 @@ class HomeManagerController extends Controller
     }
 
     public function acceptdokumen(Request $request){
+
+        //dd($request->idproyek);
         $this->validate($request,[
             'idfile' => 'required',
             'idproyek' => 'required'
