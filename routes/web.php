@@ -55,3 +55,4 @@ Route::prefix('karyawan')->group(function () {
 });
 
 Route::get('/proyekselesai', 'ProyekselesaiController@index')->name('proyekselesai.index');
+Route::get('/proyekselesai/{id}', 'ProyekselesaiController@detail')->name('proyekselesai.detail');
