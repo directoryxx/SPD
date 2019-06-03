@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -40,5 +41,29 @@ class User extends Authenticatable
     public function terlibat()
     {
         return $this->hasMany(Proyekterlibat::class);
+    }
+
+    public function proyek(){
+        return $this->hasMany(Proyek::class);
+    }
+
+    public function checkKaryawanhasTask($id){
+        $proyekid_contrib = DB::table('proyekterlibats')
+        ->where('user_id',$id)    
+        ->first();
+        if ($proyekid_contrib == null){
+            return true;
+        } else {
+            $proyekCheckContrib = DB::table('proyeks')
+            ->where('id',$proyekid_contrib->id)   
+            ->where('active',1) 
+            ->first();
+            if($proyekCheckContrib != null || $proyekid_contrib != null){
+                return false;
+            } else {
+                return true;
+            }
+        }
+
     }
 }

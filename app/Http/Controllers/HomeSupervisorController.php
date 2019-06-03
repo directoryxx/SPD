@@ -23,8 +23,6 @@ class HomeSupervisorController extends Controller
         $proyek = Proyek::with(['terlibat' => function ($query) {
             $query->where('proyekterlibats.user_id', '=', Auth::user()->id);
         }])->where('active',1)->get();
-        //dd($proyek);
-        
         return view('supervisor.activeproyek')->with('proyeks',$proyek);
     }
 
@@ -35,22 +33,17 @@ class HomeSupervisorController extends Controller
             $join->on('users.id', '=', 'proyekterlibats.user_id');
           })
           ->where('users.roles',4)
-          ->whereNull('proyekterlibats.user_id')
+          //->whereNull('proyekterlibats.user_id')
           ->get([
             'users.id',
-            'users.name',
-            
+            'users.name', 
         ]);
         $count = Proyekterlibat::where('proyek_id',$id)->count();
         $count_kat = Kategori::whereNotNull('created_at')->count();
-        
         $proyek_approve = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
-        //dd($proyek_approve);
-        
         $kategori_all = Kategori::all();
         $id_proyek = $id;
         $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();
-        //dd($dokumenrekap);
         return view('supervisor.detailproyek')
                 ->with('proyek',$proyek)
                 ->with('proyek_by',$proyek_by)
@@ -67,13 +60,18 @@ class HomeSupervisorController extends Controller
         $array = $request->karyawan;
         $key = array_keys($array);
         $max = max($key);
+        $user = new User();
         //dd($array);
         if ($this->array_has_dupes($array) == 0){
             for ($a = 0; $a<=$max;$a++){
                 $proyek = new Proyekterlibat();
-                $proyek->user_id = $array[$a];
-                $proyek->proyek_id = $id;
-                $proyek->save();
+                if ($user->checkKaryawanhasTask($array[$a])){
+                    return redirect()->back();
+                } else {
+                    $proyek->user_id = $array[$a];
+                    $proyek->proyek_id = $id;
+                    $proyek->save();    
+                }
             }
             return redirect()->back();
             
