@@ -41,9 +41,10 @@ class HomeSupervisorController extends Controller
         $count = Proyekterlibat::where('proyek_id',$id)->count();
         $count_kat = Kategori::whereNotNull('created_at')->count();
         $proyek_approve = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
-        $kategori_all = Kategori::all();
+        $kategori_all = Kategori::get();
         $id_proyek = $id;
         $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();
+        //dd($kategori_all);
         return view('supervisor.detailproyek')
                 ->with('proyek',$proyek)
                 ->with('proyek_by',$proyek_by)

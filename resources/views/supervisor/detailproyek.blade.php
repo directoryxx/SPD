@@ -159,9 +159,7 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                     <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
-                                                    <div class="card-body">
-                                                        
-                                                            
+                                                    <div class="card-body"> 
                                                                 @if(count($kategori->fileproyek) > 0)
                                                                         @foreach ($kategori->fileproyek as $file) 
                                                                             @if ($file->lokasifile != null)                                                                   
