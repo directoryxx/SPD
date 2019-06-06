@@ -112,19 +112,48 @@ class HomeKaryawanController extends Controller
         
         $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
         $id = $id->proyek_id;
-        $uploadedFile = $request->file('file');        
-        $path = $uploadedFile->store('public/files');
-        $lokasi = "files/".$request->file('file')->hashName(); 
+        $get_waiting = Fileproyek::where('proyek_id',$id)->where('kategori_id',$request->kategoriid)->where('status',0)->first();
+        $get_refuse = Fileproyek::where('proyek_id',$id)->where('kategori_id',$request->kategoriid)->where('status',2)->first();
+        //dd($get_waiting);
+        //dd($get_refuse);
         //die();
-        $file = new Fileproyek();
-        $file->namafile = $request->file->getClientOriginalName();
-        $file->lokasifile = $lokasi;
-        $file->user_id = Auth::user()->id;
-        $file->kategori_id = $request->kategoriid;
-        $file->status = 0;
-        $file->proyek_id = $id;
-        $file->save();
+        if($get_waiting == null){
+            $uploadedFile = $request->file('file');        
+            $path = $uploadedFile->store('public/files');
+            $lokasi = "files/".$request->file('file')->hashName(); 
+            //die();
+            $file = new Fileproyek();
+            $file->namafile = $request->file->getClientOriginalName();
+            $file->lokasifile = $lokasi;
+            $file->user_id = Auth::user()->id;
+            $file->kategori_id = $request->kategoriid;
+            $file->status = 0;
+            $file->proyek_id = $id;
+            $file->save();
+    
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
 
-        return redirect()->back();
+        if($get_refuse != null){
+            $uploadedFile = $request->file('file');        
+            $path = $uploadedFile->store('public/files');
+            $lokasi = "files/".$request->file('file')->hashName(); 
+            //die();
+            $file = new Fileproyek();
+            $file->namafile = $request->file->getClientOriginalName();
+            $file->lokasifile = $lokasi;
+            $file->user_id = Auth::user()->id;
+            $file->kategori_id = $request->kategoriid;
+            $file->status = 0;
+            $file->proyek_id = $id;
+            $file->save();
+    
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
+
     }
 }
