@@ -34,7 +34,7 @@
                         <div class="card-header">
                         <i class="fa fa-user"></i> Karyawan yg ditunjuk </div>
                         <div class="card-body">
-                            @if($count == 4)
+                            @if($count == 5)
                                 <center>
                                     <p> Terkunci , Anda telah memilih karyawan </p>
 
@@ -142,7 +142,7 @@
                         <i class="fa fa-upload"></i> File yang sudah diupload </div>
                         <div class="card-body">
                             <center>
-                                @if ($count == 4)
+                                @if ($count > 1)
                                 @foreach ($kategori_all as $kategori)
                                     @if($kategori->id == 101)
 
