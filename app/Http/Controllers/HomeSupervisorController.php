@@ -103,7 +103,6 @@ class HomeSupervisorController extends Controller
         $key = array_keys($array);
         $max = max($key);
         $user = new User();
-        //dd($user->checkKaryawanhasTask(6));
         //dd($array);
         if ($this->array_has_dupes($array) == 0){
             for ($a = 0; $a<=$max;$a++){

@@ -55,10 +55,11 @@ class User extends Authenticatable
             return true;
         } else {
             $proyekCheckContrib = DB::table('proyeks')
-            ->where('id',$proyekid_contrib->id)   
+            ->where('id',$proyekid_contrib->proyek_id)   
             ->where('active',1) 
             ->first();
-            if($proyekCheckContrib != null || $proyekid_contrib != null){
+            //dd($proyekCheckContrib);
+            if($proyekCheckContrib != null){
                 return false;
             } else {
                 return true;
