@@ -72,7 +72,7 @@ class CreateProjectController extends Controller
         $proyekterlibat->proyek_id = $lastid;
 
         $proyekterlibat->save();
-
+        //dd($proyekterlibat->id);
         return redirect()->back();
 
     }
