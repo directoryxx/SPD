@@ -34,7 +34,12 @@
                         <div class="card-header">
                         <i class="fa fa-user"></i> Karyawan yg ditunjuk </div>
                         <div class="card-body">
-                            @if($count < 5)
+                            @if($count == 4)
+                                <center>
+                                    <p> Terkunci , Anda telah memilih karyawan </p>
+
+                                </center>
+                            @else
                                 <form action="{{url('supervisor/detailproyek')}}/{{$id}}" method="post">
                                     <div class="form-group">
                                         <label for="email">Karyawan 1:</label>
@@ -71,13 +76,7 @@
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
-                                </form>
-
-                            @else
-                                <center>
-                                    <p> Terkunci , Anda telah memilih karyawan </p>
-
-                                </center>
+                                </form>                                
                             @endif
 
                         </div>
@@ -132,113 +131,95 @@
                                     @endif
                                 
                             @else
-                                <p>Dokumen belum disetujui semua</p>
+                                <center><p>Dokumen belum disetujui semua</p></center>
                             @endif
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                        <i class="fa fa-upload"></i> File Upload </div>
+                        <i class="fa fa-upload"></i> File yang sudah diupload </div>
                         <div class="card-body">
                             <center>
-                                @if ($count < 5)
+                                @if ($count == 4)
+                                @foreach ($kategori_all as $kategori)
+                                    @if($kategori->id == 101)
 
-                                    <p> Upload tidak tersedia, Silahkan tunjuk Karyawan</p>   
+                                    @else 
+                                        <div class="col-lg-12 text-center">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                <i class="fa fa-upload"></i> {{$kategori->kategori->namakategori}} </div>
+                                                <div class="card-body"> 
+                                                <center>
+                                                <a target="_blank" href="/{{$kategori->lokasifile}}">Link Dokumen</a>
+                                                <br/>
+                                                @if ($kategori->status == 1)
+                                                    <br/>
+                                                    <div class="alert alert-success">
+                                                        Dokumen Sudah anda terima
+                                                    </div>
+                                                @elseif ($kategori->status == 2)
+                                                    <br/>
+                                                    <div class="alert alert-warning">
+                                                        Dokumen Sudah anda tolak
+                                                    </div>
+                                                @else 
+                                                    <div class="float-sm-left">
+                                                        <button onclick="event.preventDefault(); document.getElementById('accept-form{{$kategori->id}}').submit();" type="button" class="btn btn-success">Approve</button>
+                                                        <form id="accept-form{{$kategori->id}}" action="{{ route('supervisor.acceptfile') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                            <input type="hidden" name="idfile" value="{{$kategori->id}}">
+
+                                                        </form>
+                                                    </div>
+                                                    <div class="float-sm-right">
+                                                        <button type="button" data-toggle="modal" data-target="#rejectmodal{{$kategori->id}}" class="btn btn-danger">Reject</button>
+                                                        <div class="modal" id="rejectmodal{{$kategori->id}}">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+
+                                                                <!-- Modal Header -->
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Alasan Di tolak </h4>
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+
+                                                                <!-- Modal body -->
+                                                                <div class="modal-body">
+                                                                    <form action="{{ route('supervisor.rejectfile') }}" method="POST">
+                                                                    <div class="form-group">
+                                                                        {{csrf_field()}}
+                                                                        <input type="hidden" name="idfile" value="{{$kategori->id}}">
+                                                                        <label for="exampleFormControlTextarea1">{{$kategori->namafile}}</label>
+                                                                        <textarea name="komentar" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-danger" >Simpan</button>
+                                                                    </form>
+                                                                </div>
+
+                                                                <!-- Modal footer -->
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><br>
+
+
+                                                @endif
+                                                </center>  
+                                                    
+                                                </div>
+                                            </div>
+                                    
+                                        </div>
+                                        @endif
+                                    @endforeach
                                 @elseif($count_kat == 0)
                                     <p> Tidak ada kategori , Silahkan hubungi admin </p>
-
                                 @else 
-                                        @foreach ($kategori_all as $kategori)
-                                        @if($kategori->id == 101)
-
-                                        @else 
-                                            <div class="col-lg-12 text-center">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                    <i class="fa fa-upload"></i> {{$kategori->namakategori}} </div>
-                                                    <div class="card-body"> 
-                                                                @if(count($kategori->fileproyek) > 0)
-                                                                        @foreach ($kategori->fileproyek as $file) 
-                                                                            @if ($file->lokasifile != null)                                                                   
-                                                                                <a target="_blank" href="/{{$file->lokasifile}}">Link Dokumen</a>
-                                                                                <br/>
-                                                                                @if ($file->status == 1)
-                                                                                    <br/>
-                                                                                    <div class="alert alert-success">
-                                                                                        Dokumen Sudah anda terima
-                                                                                    </div>
-                                                                                @elseif ($file->status == 2)
-                                                                                    <br/>
-                                                                                    <div class="alert alert-warning">
-                                                                                        Dokumen Sudah anda tolak
-                                                                                    </div>
-                                                                                @else 
-                                                                                    <div class="float-sm-left">
-                                                                                        <button onclick="event.preventDefault(); document.getElementById('accept-form{{$file->id}}').submit();" type="button" class="btn btn-success">Approve</button>
-                                                                                        <form id="accept-form{{$file->id}}" action="{{ route('supervisor.acceptfile') }}" method="POST" style="display: none;">
-                                                                                            @csrf
-                                                                                            <input type="hidden" name="idfile" value="{{$file->id}}">
-
-                                                                                        </form>
-                                                                                    </div>
-                                                                                    <div class="float-sm-right">
-                                                                                        <button type="button" data-toggle="modal" data-target="#rejectmodal{{$file->id}}" class="btn btn-danger">Reject</button>
-                                                                                        <div class="modal" id="rejectmodal{{$file->id}}">
-                                                                                            <div class="modal-dialog">
-                                                                                                <div class="modal-content">
-
-                                                                                                <!-- Modal Header -->
-                                                                                                <div class="modal-header">
-                                                                                                    <h4 class="modal-title">Alasan Di tolak </h4>
-                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                </div>
-
-                                                                                                <!-- Modal body -->
-                                                                                                <div class="modal-body">
-                                                                                                    <form action="{{ route('supervisor.rejectfile') }}" method="POST">
-                                                                                                    <div class="form-group">
-                                                                                                        {{csrf_field()}}
-                                                                                                        <input type="hidden" name="idfile" value="{{$file->id}}">
-                                                                                                        <label for="exampleFormControlTextarea1">{{$file->namafile}}</label>
-                                                                                                        <textarea name="komentar" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                    </div>
-                                                                                                    <button type="submit" class="btn btn-danger" >Simpan</button>
-                                                                                                    </form>
-                                                                                                </div>
-
-                                                                                                <!-- Modal footer -->
-                                                                                                
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div><br>
-
-
-                                                                                @endif
-
-                                                                            @endif
-                                                                        @endforeach
-                                                                
-                                                                @else
-                                                                    <p>Karyawan Belum Upload File</p>
-                                                                @endif
-                                                                <br/>
-
-                                                                
-                                                                
-                                                            
-                                                            <br/>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                            @endif
-                                            @endforeach
-                                        
-
+                                    <p> Upload tidak tersedia, Silahkan tunjuk Karyawan</p>                                       
                                 @endif
                             </center>
 

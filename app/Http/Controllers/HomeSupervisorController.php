@@ -29,6 +29,40 @@ class HomeSupervisorController extends Controller
     public function proyekhandlespv($id){
         $proyek_by = Proyek::find($id)->createdby()->first();
         $proyek = Proyek::find($id)->first();
+        $user = new User();
+        $karyawan = User::leftJoin('proyekterlibats', function($join) {
+            $join->on('users.id', '=', 'proyekterlibats.user_id');
+          })
+          ->where('users.roles',4)
+          //->whereNull('proyekterlibats.user_id')
+          ->get([
+            'users.id',
+            'users.name', 
+        ]);
+        //dd($user->checkKaryawanhasTask(9));
+        
+        $count = Proyekterlibat::where('proyek_id',$id)->count();
+        $count_kat = Kategori::whereNotNull('created_at')->count();
+        $proyek_approve = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
+        $kategori_all = Fileproyek::with('kategori','proyek')->where('proyek_id',$id)->get();
+        $id_proyek = $id;
+        $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();
+        //dd($kategori_all);
+        return view('supervisor.detailproyek')
+                ->with('proyek',$proyek)
+                ->with('proyek_by',$proyek_by)
+                ->with('karyawans',$karyawan)
+                ->with('id',$id_proyek)
+                ->with('count',$count)
+                ->with('kategori_all',$kategori_all)
+                ->with('count_kat',$count_kat)
+                ->with('dokumenrekap',$dokumenrekap)
+                ->with('proyek_approve',$proyek_approve);
+    }
+
+    public function proyekhandlespv_old($id){
+        $proyek_by = Proyek::find($id)->createdby()->first();
+        $proyek = Proyek::find($id)->first();
         $karyawan = User::leftJoin('proyekterlibats', function($join) {
             $join->on('users.id', '=', 'proyekterlibats.user_id');
           })
@@ -62,11 +96,12 @@ class HomeSupervisorController extends Controller
         $key = array_keys($array);
         $max = max($key);
         $user = new User();
+        //dd($user->checkKaryawanhasTask(6));
         //dd($array);
         if ($this->array_has_dupes($array) == 0){
             for ($a = 0; $a<=$max;$a++){
                 $proyek = new Proyekterlibat();
-                if ($user->checkKaryawanhasTask($array[$a])){
+                if (!$user->checkKaryawanhasTask($array[$a])){
                     return redirect()->back();
                 } else {
                     $proyek->user_id = $array[$a];
