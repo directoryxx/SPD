@@ -72,7 +72,7 @@
                                                     <i class="fa fa-upload"></i> {{$kategori->kategori->namakategori}} </div>
                                                     <div class="card-body"> 
                                                     
-                                                    <a target="_blank" href="/{{$kategori->lokasifile}}">Link Dokumen</a>
+                                                    <a target="_blank" href="/storage/{{$kategori->lokasifile}}">Link Dokumen</a>
                                                     <br/>
                                                     @if ($kategori->status == 1)
                                                         <br/>

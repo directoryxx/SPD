@@ -54,7 +54,7 @@
                                                                     @else
                                                                         @php($i++)
                                                                         @if ($file->lokasifile != null)                                                                   
-                                                                            <a href="/{{$file->lokasifile}}">Link Dokumen</a>
+                                                                            <a href="/storage/{{$file->lokasifile}}">Link Dokumen</a>
                                                                             <br/>
                                                                             <br/>
                                                                             

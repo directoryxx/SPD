@@ -35,17 +35,7 @@ class HomeSupervisorController extends Controller
             return redirect(url('proyekselesai'));
         } else {
             $user = new User();
-            $karyawan = User::leftJoin('proyekterlibats', function($join) {
-                $join->on('users.id', '=', 'proyekterlibats.user_id');
-              })
-              ->where('users.roles',4)
-              //->whereNull('proyekterlibats.user_id')
-              ->get([
-                'users.id',
-                'users.name', 
-            ]);
-            //dd($user->checkKaryawanhasTask(9));
-            
+            $karyawan = User::where('roles',4)->get();
             $count = Proyekterlibat::where('proyek_id',$id)->count();
             $count_kat = Kategori::whereNotNull('created_at')->count();
             $proyek_approve = Fileproyek::where('proyek_id',$id)->where('kategori_id','>',101)->where('status',1)->count();
@@ -74,7 +64,6 @@ class HomeSupervisorController extends Controller
             $join->on('users.id', '=', 'proyekterlibats.user_id');
           })
           ->where('users.roles',4)
-          //->whereNull('proyekterlibats.user_id')
           ->get([
             'users.id',
             'users.name', 
@@ -85,7 +74,6 @@ class HomeSupervisorController extends Controller
         $kategori_all = Kategori::get();
         $id_proyek = $id;
         $dokumenrekap = Fileproyek::where('proyek_id',$id)->where('kategori_id',101)->first();
-        //dd($kategori_all);
         return view('supervisor.detailproyek')
                 ->with('proyek',$proyek)
                 ->with('proyek_by',$proyek_by)
@@ -103,7 +91,6 @@ class HomeSupervisorController extends Controller
         $key = array_keys($array);
         $max = max($key);
         $user = new User();
-        //dd($array);
         if ($this->array_has_dupes($array) == 0){
             for ($a = 0; $a<=$max;$a++){
                 $proyek = new Proyekterlibat();
@@ -132,7 +119,6 @@ class HomeSupervisorController extends Controller
         ]);
         $fileproyek = Fileproyek::find($request->idfile);
         $fileproyek->status = 1;
-        //$pegawai->alamat = $request->alamat;
         $fileproyek->save();
         return redirect()->back();
     }
@@ -144,14 +130,12 @@ class HomeSupervisorController extends Controller
         $fileproyek = Fileproyek::find($request->idfile);
         $fileproyek->status = 2;
         $fileproyek->komentar = $request->komentar;
-        //$pegawai->alamat = $request->alamat;
         $fileproyek->save();
         return redirect()->back();
     }
 
     public function fileUpload(Request $request){
         $id = Proyekterlibat::where('user_id',Auth::user()->id)->first();
-        //dd($id);
         $id = $id->proyek_id;
         $this->validate($request, [
             'file' => 'required|file|max:2000'
@@ -159,7 +143,6 @@ class HomeSupervisorController extends Controller
         $uploadedFile = $request->file('file');        
         $path = $uploadedFile->store('public/files');
         $lokasi = "files/".$request->file('file')->hashName(); 
-        //dd();
         $file = new Fileproyek();
         $file->namafile = $request->file->getClientOriginalName();
         $file->lokasifile = $lokasi;

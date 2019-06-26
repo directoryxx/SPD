@@ -23,7 +23,7 @@
                                 <p> Lokasi Proyek : {{$proyek->lokasiproyek}}</p>
                                 <p> PT Pengaju : {{$proyek->ptpengaju}}</p>
                                 <p> Ditunjuk Oleh : {{$proyek_by->name}}</p>
-                                <p> Proyek Masuk : <a href="/{{$proyek->lokasifileproyekmasuk}}">Link Dokumen</a></p>
+                                <p> Proyek Masuk : <a href="/storage/{{$proyek->lokasifileproyekmasuk}}">Link Dokumen</a></p>
                             </center>
 
                         </div>
@@ -108,7 +108,7 @@
                                     </form>
                                     @else
                                         <center>
-                                        <a target="_blank" href="/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
+                                        <a target="_blank" href="/storage/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
                                         <br/>
                                         @if ($dokumenrekap->status == 1)
                                             <br/>
@@ -153,7 +153,7 @@
                                                 <i class="fa fa-upload"></i> {{$kategori->kategori->namakategori}} </div>
                                                 <div class="card-body"> 
                                                 <center>
-                                                <a target="_blank" href="/{{$kategori->lokasifile}}">Link Dokumen</a>
+                                                <a target="_blank" href="/storage/{{$kategori->lokasifile}}">Link Dokumen</a>
                                                 <br/>
                                                 @if ($kategori->status == 1)
                                                     <br/>

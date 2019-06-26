@@ -22,7 +22,7 @@
                                 <p> Nama Proyek : {{$proyek->namaproyek}}</p>
                                 <p> Lokasi Proyek : {{$proyek->lokasiproyek}}</p>
                                 <p> PT Pengaju : {{$proyek->ptpengaju}}</p>
-                                <p> Proyek Masuk : <a href="/{{$proyek->lokasifileproyekmasuk}}">Link Dokumen</a></p>
+                                <p> Proyek Masuk : <a href="/storage/{{$proyek->lokasifileproyekmasuk}}">Link Dokumen</a></p>
                             </center>
 
                         </div>
@@ -61,7 +61,7 @@
                                         </center>
                                     @else
                                         <center>
-                                        <a target="_blank" href="/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
+                                        <a target="_blank" href="/storage/{{$dokumenrekap->lokasifile}}">Link Dokumen</a>
                                         <br/>
                                         @if ($dokumenrekap->status == 1)
                                             <br/>
@@ -158,7 +158,7 @@
                                                                 @if(count($kategori->fileproyek) > 0)
                                                                         @foreach ($kategori->fileproyek as $file) 
                                                                             @if ($file->lokasifile != null)                                                                   
-                                                                                <a target="_blank" href="/{{$file->lokasifile}}">Link Dokumen</a>
+                                                                                <a target="_blank" href="/storage/{{$file->lokasifile}}">Link Dokumen</a>
                                                                                 <br/>
                                                                                 @if ($file->status == 1)
                                                                                     <br/>
