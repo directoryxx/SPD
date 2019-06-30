@@ -56,12 +56,17 @@
                                         <td>{{$kategoris->namakategori}}</td>
                                         <td>{{$kategoris->created_at}}</td>
                                         <td>
-                                            <span class="badge badge-warning"><a data-toggle="modal" data-target="#exampleModal{{$kategoris->id}}" href="">Edit</a></span>
-                                            <span class="badge badge-danger"><a onclick="event.preventDefault(); document.getElementById('delete-form{{$kategoris->id}}').submit();" href="{{url('admin/kategori/')}}/{{$kategoris->id}}">Hapus</a></span>
-                                            <form id="delete-form{{$kategoris->id}}" action="{{url('admin/kategori/')}}/{{$kategoris->id}}" method="POST" style="display: none;">
-                                                @csrf
-                                                {{method_field('DELETE')}}
-                                            </form>
+                                            @if($kategoris->id == 101)
+        
+                                            @else
+                                                <span class="badge badge-warning"><a data-toggle="modal" data-target="#exampleModal{{$kategoris->id}}" href="">Edit</a></span>
+                                                <span class="badge badge-danger"><a onclick="event.preventDefault(); document.getElementById('delete-form{{$kategoris->id}}').submit();" href="{{url('admin/kategori/')}}/{{$kategoris->id}}">Hapus</a></span>
+                                                <form id="delete-form{{$kategoris->id}}" action="{{url('admin/kategori/')}}/{{$kategoris->id}}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    {{method_field('DELETE')}}
+                                                </form>
+
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
