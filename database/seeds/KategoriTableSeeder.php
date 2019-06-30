@@ -14,7 +14,7 @@ class KategoriTableSeeder extends Seeder
     {
         DB::table('kategoris')->insert([
             'id' => 101,
-            'namakategori' => 'Dokumen Proyek Selesai',
+            'namakategori' => 'Laporan Proyek Selesai',
             
         ]);
     }

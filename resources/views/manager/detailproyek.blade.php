@@ -51,7 +51,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                        <i class="fa fa-book"></i> Rekap dokumen manajer </div>
+                        <i class="fa fa-book"></i> Rekap laporan manajer </div>
                         <div class="card-body">
                             @if($count_kat == $proyek_approve)
                                 @if($dokumenrekap != null)
