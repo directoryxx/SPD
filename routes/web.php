@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/opengate', 'OpenGateController@index')->name('opengate');
 
+Route::get('/mailtest', 'MailController@index')->name('mail');
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/index', 'HomeAdminController@index')->name('admin.index');

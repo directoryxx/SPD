@@ -23,5 +23,9 @@ class Proyekterlibat extends Model
         return $this->morphTo();
     }
 
+    public function supervisor(){
+        return $this->hasOne(User::class);
+    }
+
     
 }

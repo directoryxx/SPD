@@ -29,4 +29,8 @@ class Fileproyek extends Model
             ->count();
         return $count_file;
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
