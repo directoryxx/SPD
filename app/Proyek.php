@@ -23,4 +23,8 @@ class Proyek extends Model
     public function file(){
         return $this->hasMany(Fileproyek::class);
     }
+
+    public function owner(){
+        return $this->belongsTo(User::class,'createdby','id');
+    }
 }

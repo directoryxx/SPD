@@ -176,13 +176,13 @@ class HomeSupervisorController extends Controller
         ]);
         $uploadedFile = $request->file('file');
         
-        $manager = Proyek::with(['createdby'])
+        $manager = Proyek::with(['owner'])
             ->where('id', $id)
-            ->whereHas('createdby', function ($query) {
+            ->whereHas('owner', function ($query) {
                 $query->where('roles', '=', '2');
             })
             ->get();
-        dd($manager[0]->createdby);
+        //dd($manager[0]->owner->email);
         $path = $uploadedFile->store('public/files');
         $lokasi = "files/" . $request->file('file')->hashName();
         $file = new Fileproyek();
@@ -194,8 +194,8 @@ class HomeSupervisorController extends Controller
         $file->proyek_id = $id;
         $file->save();
 
-        $to_name = $manager[0]->createdby->name;
-        $to_email = $manager[0]->createdby->email;
+        $to_name = $manager[0]->owner->name;
+        $to_email = $manager[0]->owner->email;
         $data = array('name' => $to_name, "kategori" => $request->kategoriid);
         Mail::send('mail.xyz', $data, function ($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
