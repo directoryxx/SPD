@@ -130,7 +130,7 @@ class HomeKaryawanController extends Controller
         ->get();
         //dd($query);
         //dd($supervisor[0]->user->email);
-        if ($get_waiting == null) {
+        if ($get_waiting == null && $get_accept == null) {
             $uploadedFile = $request->file('file');
             $path = $uploadedFile->store('public/files');
             $lokasi = "files/" . $request->file('file')->hashName();
