@@ -118,7 +118,8 @@ class HomeKaryawanController extends Controller
         //dd($id);
         $get_waiting = Fileproyek::where('proyek_id', $id)->where('kategori_id', $request->kategoriid)->where('status', 0)->first();
         $get_refuse = Fileproyek::where('proyek_id', $id)->where('kategori_id', $request->kategoriid)->where('status', 2)->first();
-        //dd($get_waiting);
+        $get_accept = Fileproyek::where('proyek_id', $id)->where('kategori_id', $request->kategoriid)->where('status', 1)->first();
+        dd($get_accept);
         //dd($get_refuse);
         //die();
         $supervisor = Proyekterlibat::with(['user'])
